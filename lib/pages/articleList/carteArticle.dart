@@ -1,16 +1,10 @@
 import 'package:app/business/models/article.dart';
 import 'package:app/pages/comment/commentPage.dart';
 import 'package:flutter/material.dart';
+import 'package:share_plus/share_plus.dart';
 
 class CarteArticles extends StatelessWidget {
-  //final String? title;
-  //final String? auteur;
-  //final String? photo;
-  //final String? dateCreation;
-  //final int? nbrComment;
-  //Article? article;
   final Article article;
-  //List<dynamic> art = [];
 
   CarteArticles(this.article);
 
@@ -144,7 +138,9 @@ class CarteArticles extends StatelessWidget {
                 ),
 
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Share.share('test',subject: 'test');
+                  },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.green,
                   ),

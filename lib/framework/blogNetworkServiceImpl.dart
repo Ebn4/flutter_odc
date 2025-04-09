@@ -31,15 +31,17 @@ class BlogNetworkServiceImpl implements BlogNetworkService {
     return user;
   }
 
+
+
+  // Bloc de traitement des opérations liées aux articles du blog : récupération, création, mise à jour.
+
   @override
   Future<List<Article>> recupererArticle() async {
     var url = Uri.parse("http://10.252.252.5:8000/api/articles");
     var response = await http.get(url);
-    // print("Réponse brute de l'API : ${response.body}");
 
     if (response.statusCode == 200) {
       Map<String, dynamic> jsonResponse = jsonDecode(response.body);
-      // List<dynamic> jsonResponse = jsonDecode(response.body);
       List<dynamic> articleData = jsonResponse['data'];
       return articleData.map((article) => Article.fromMap(article)).toList();
     } else {
@@ -56,6 +58,8 @@ class BlogNetworkServiceImpl implements BlogNetworkService {
 
   static const String baseUrl = "http://10.252.252.5:8000/api";
 
+
+  // Bloc de traitement des opérations liées aux commentaires.
 
   @override
   Future<bool> ajouterCommentaire(data, String token) async {
@@ -97,10 +101,7 @@ class BlogNetworkServiceImpl implements BlogNetworkService {
       url,
       headers: {"Authorization": "Bearer $token"},
     );
-    print(response.statusCode);
-    // print(response.body);
     if (response.statusCode == 200) {
-      // print(response.body);
       Map jsonResponse = jsonDecode(response.body);
       List data = jsonResponse["data"];
       return data.map((data) => Comment.fromJson(data)).toList();
