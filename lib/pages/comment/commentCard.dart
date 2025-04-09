@@ -44,7 +44,13 @@ class CommentCard extends StatelessWidget {
                     ),
                     const SizedBox(height: 5),
                     Text(commentaire.content ?? "Aucun texte"),
-                    Text("Posté " + commentaire.dateCreation),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        SizedBox(height: 20,),
+                        Text("Posté " + commentaire.dateCreation,style: TextStyle(fontWeight: FontWeight.bold),),
+                      ],
+                    )
                   ],
                 ),
               ),
