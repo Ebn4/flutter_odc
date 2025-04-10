@@ -27,15 +27,20 @@ class _LoginState extends ConsumerState<Login> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SizedBox(height: 100),
-          
+
               CircleAvatar(
                 radius: 80, // Taille de l'avatar
-                backgroundColor: const Color.fromARGB(181, 255, 30, 0), // Couleur de fond
-                child: Icon(Icons.person, size: 80, color: Colors.white,),
+                backgroundColor: const Color.fromARGB(
+                  181,
+                  255,
+                  30,
+                  0,
+                ), // Couleur de fond
+                child: Icon(Icons.person, size: 80, color: Colors.white),
               ),
-          
+
               SizedBox(height: 50),
-          
+
               SizedBox(
                 height: 80,
                 width: 400,
@@ -52,7 +57,7 @@ class _LoginState extends ConsumerState<Login> {
                 ),
               ),
               SizedBox(height: 50),
-          
+
               SizedBox(
                 height: 80,
                 width: 400,
@@ -86,7 +91,12 @@ class _LoginState extends ConsumerState<Login> {
                   }
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color.fromARGB(181, 255, 30, 0), // Couleur du bouton
+                  backgroundColor: const Color.fromARGB(
+                    181,
+                    255,
+                    30,
+                    0,
+                  ), // Couleur du bouton
                   foregroundColor: Colors.white, // Couleur du texte
                   padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
                   shape: RoundedRectangleBorder(
