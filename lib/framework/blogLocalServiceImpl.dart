@@ -15,6 +15,12 @@ class BlogLocalServiceImpl implements BlogLocalService {
     await box?.write("user", jsonEncode(data));
     return true;
   }
+
+  @override
+  Future<User?> recupererUser() async {
+    var user = await box?.read("user") as String?;
+    if (user == null) return null;
+    var data = jsonDecode(user) as Map;
+    return User.fromMap(data);
+  }
 }
-
-
