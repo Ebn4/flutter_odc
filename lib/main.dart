@@ -10,6 +10,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_it/get_it.dart';
 
 import 'framework/blogNetworkServiceImpl.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 
 var getIt = GetIt.instance;
@@ -24,8 +25,9 @@ void setup(){
 
 
 }
-void main(){setup();
-runApp(ProviderScope(child: Appication()));
+void main() async{setup();
+  await dotenv.load(); // Charge les variables du .env
+  runApp(ProviderScope(child: Appication()));
 }
 class Appication extends StatelessWidget {
   const Appication({super.key});

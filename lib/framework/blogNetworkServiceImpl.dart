@@ -7,11 +7,12 @@ import 'package:http/http.dart';
 import 'package:http/http.dart' as http;
 
 import '../business/models/article.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class BlogNetworkServiceImpl implements BlogNetworkService {
   @override
   Future<User?> authentifier(Authentification data) async {
-    var url = Uri.parse("http://10.252.252.5:8000/api/login");
+    var url = Uri.parse("${dotenv.env['API_BASE_URL']}/login");
     var body = jsonEncode(data.toJson());
     var response = await http.post(
       url,
@@ -37,7 +38,7 @@ class BlogNetworkServiceImpl implements BlogNetworkService {
 
   @override
   Future<List<Article>> recupererArticle() async {
-    var url = Uri.parse("http://10.252.252.5:8000/api/articles");
+    var url = Uri.parse("${dotenv.env['API_BASE_URL']}/articles");
     var response = await http.get(url);
 
     if (response.statusCode == 200) {
@@ -51,19 +52,18 @@ class BlogNetworkServiceImpl implements BlogNetworkService {
 
   @override
   Future<void> liker(int articleid) async {
-    var url = Uri.parse("http://10.252.252.5:8000/api/getAllArticles");
+    var url = Uri.parse("${dotenv.env['API_BASE_URL']}/getAllArticles");
     var response = await http.get(url);
     print("Réponse brute de l'API : ${response.body}");
   }
 
-  static const String baseUrl = "http://10.252.252.5:8000/api";
 
 
   // Bloc de traitement des opérations liées aux commentaires.
 
   @override
   Future<bool> ajouterCommentaire(data, String token) async {
-    var url = Uri.parse("http://10.252.252.5:8000/api/comments");
+    var url = Uri.parse("${dotenv.env['API_BASE_URL']}/comments");
     var body = jsonEncode(data.toJson());
     var response = await http.post(
       url,
@@ -82,7 +82,7 @@ class BlogNetworkServiceImpl implements BlogNetworkService {
 
   @override
   Future<bool> supprimerCommentaire(int commentId, String token) async {
-    var url = Uri.parse("http://10.252.252.5:8000/api/comments/${commentId}");
+    var url = Uri.parse("${dotenv.env['API_BASE_URL']}/comments/${commentId}");
     var response = await http.delete(url);
     if (response.statusCode == 200) {
       return true;
@@ -96,7 +96,7 @@ class BlogNetworkServiceImpl implements BlogNetworkService {
     int articleId,
     String token,
   ) async {
-    var url = Uri.parse("http://10.252.252.5:8000/api/comments/$articleId");
+    var url = Uri.parse("${dotenv.env['API_BASE_URL']}/comments/$articleId");
     var response = await http.get(
       url,
       headers: {"Authorization": "Bearer $token"},
