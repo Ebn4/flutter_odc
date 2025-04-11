@@ -29,7 +29,7 @@ class LoginControl extends StateNotifier<LoginState> {
   }
 
   Future<void> recupererUserLocal() async {
-    var user = await local.recupererUser();
+    var user = await local.recupererUserLocal();
     state = state.copyWith(user: user);
   }
 }

@@ -1,15 +1,16 @@
 import 'package:app/business/models/article.dart';
 import 'package:app/pages/comment/commentPage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:share_plus/share_plus.dart';
 
-class CarteArticles extends StatelessWidget {
+class CarteArticles extends ConsumerWidget {
   final Article article;
 
   CarteArticles(this.article);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef) {
     return Container(
       margin: EdgeInsets.all(20),
       decoration: BoxDecoration(
@@ -91,8 +92,6 @@ class CarteArticles extends StatelessWidget {
                   onPressed: () {
                     
 
-
-                    
                   },
                   style: ElevatedButton.styleFrom(
                     iconColor: Colors.red[700],
