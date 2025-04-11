@@ -17,7 +17,7 @@ class BlogLocalServiceImpl implements BlogLocalService {
     return true;
   }
 
-  @override
+
   Future<bool> deconnecterUser() async{
     await box?.remove("user");
     return true ;
@@ -34,5 +34,3 @@ class BlogLocalServiceImpl implements BlogLocalService {
     return user;
   }
 }
-
-

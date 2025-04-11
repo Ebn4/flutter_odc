@@ -21,7 +21,7 @@ class ListArticleCtrl extends StateNotifier<ListArticleState> {
 
   Future<void> rechercherArticle(String texte) async {}
 
-  Future<void> liker(int articleid) async {
+  Future<void> liker(int articleid,String token) async {
     state = state.copyWith(isLoading: true);
     var response =await blogNetwork.liker(articleid);
     state.copyWith();

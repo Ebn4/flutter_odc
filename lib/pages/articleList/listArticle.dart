@@ -1,7 +1,9 @@
 
+import 'package:app/pages/userProfil/userProfilPage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../login/login.dart';
 import '../login/loginControl.dart';
 import 'carteArticle.dart';
 import 'listArticleCtrl.dart';
@@ -48,6 +50,56 @@ class _ListArticleState extends ConsumerState<ListarticlePage> {
         }
       ),
       backgroundColor: Colors.white,
+      bottomNavigationBar: Container(
+        padding: EdgeInsets.symmetric(vertical: 30, horizontal: 30),
+        color: Color(0xFFFF6666),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            ElevatedButton(onPressed: (){
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => ListarticlePage()),
+              );
+            },
+                style: ElevatedButton.styleFrom(
+                    backgroundColor: Color(0xFFFF6666),
+                    elevation: 0
+                ),
+
+                child: Icon(Icons.home, color: Colors.white,size: 35,)
+            ),
+
+            ElevatedButton(onPressed: (){
+              Navigator.push(
+                context,
+                //remplacé par la classe de la page de creation
+                MaterialPageRoute(builder: (_) => ListarticlePage()),
+              );
+            },
+                style: ElevatedButton.styleFrom(
+                    backgroundColor: Color(0xFFFF6666),
+                    elevation: 0
+                ),
+                child: Icon(Icons.add, color: Colors.white, size: 35,)
+            ),
+
+            ElevatedButton(onPressed: (){
+              Navigator.push(
+                context,
+                //remplacé par la classe de la page user
+                MaterialPageRoute(builder: (_) => UserProfilePage()),
+              );
+            },
+                style: ElevatedButton.styleFrom(
+                    backgroundColor: Color(0xFFFF6666),
+                    elevation: 0
+                ),
+                child: Icon(Icons.person, color: Colors.white, size: 35, )
+            )
+          ],
+        ),
+      ),
     );
   }
 }

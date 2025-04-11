@@ -27,15 +27,20 @@ class _LoginState extends ConsumerState<Login> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SizedBox(height: 100),
-          
+
               CircleAvatar(
                 radius: 80, // Taille de l'avatar
-                backgroundColor: const Color.fromARGB(181, 255, 30, 0), // Couleur de fond
-                child: Icon(Icons.person, size: 80, color: Colors.white,),
+                backgroundColor: const Color.fromARGB(
+                  181,
+                  255,
+                  30,
+                  0,
+                ), // Couleur de fond
+                child: Icon(Icons.person, size: 80, color: Colors.white),
               ),
-          
+
               SizedBox(height: 50),
-          
+
               SizedBox(
                 height: 80,
                 width: 400,
@@ -48,15 +53,16 @@ class _LoginState extends ConsumerState<Login> {
                     labelText: "Email",
                     hintText: "Email",
                     hintStyle: const TextStyle(fontWeight: FontWeight.bold),
+                    prefixIcon: Icon(Icons.email)
                   ),
                 ),
               ),
-              SizedBox(height: 50),
-          
+              SizedBox(height: 20),
+
               SizedBox(
                 height: 80,
                 width: 400,
-                child: TextField(
+                child: TextFormField(
                   controller: passwordCtrl,
                   obscureText: true,
                   decoration: InputDecoration(
@@ -65,38 +71,58 @@ class _LoginState extends ConsumerState<Login> {
                     ),
                     labelText: "Mot de passe",
                     hintText: "Mot de passe",
+                    prefixIcon: Icon(Icons.lock),
                     hintStyle: const TextStyle(fontWeight: FontWeight.bold),
                   ),
+                  validator: (value)  {
+                    if(value == null || value.isEmpty){
+                      return "Veuillez remplir tous les champs";
+                    }
+                    return null;
+                  },
                 ),
               ),
-              ElevatedButton(
-                onPressed: () async {
-                  var ctrl = ref.read(loginControlPorvider.notifier);
-                  var data = Authentification(
-                    email: emaiCtrl.text,
-                    password: passwordCtrl.text,
-                  );
-                  var res = await ctrl.submitForm(data);
-                  if (res) {
-                    // navigation vers article list
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (_) => ListarticlePage()),
+              SizedBox(
+                height: 50,
+                width: 400,
+                child: ElevatedButton(
+                  onPressed: () async {
+                    var ctrl = ref.read(loginControlPorvider.notifier);
+                    var data = Authentification(
+                      email: emaiCtrl.text,
+                      password: passwordCtrl.text,
                     );
-                  }
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color.fromARGB(181, 255, 30, 0), // Couleur du bouton
-                  foregroundColor: Colors.white, // Couleur du texte
-                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10), // Bords arrondis
+                    var res = await ctrl.submitForm(data);
+                    if (res) {
+                      // navigation vers article list
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (_) => ListarticlePage()),
+                      );
+                    }
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color.fromARGB(
+                      181,
+                      255,
+                      30,
+                      0,
+                    ), // Couleur du bouton
+                    foregroundColor: Colors.white, // Couleur du texte
+                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10), // Bords arrondis
+                    ),
+                  ),
+                  child: Text(
+                    state.isLoading == true ? "Chargement..." : "Se connecter",
                   ),
                 ),
-                child: Text(
-                  state.isLoading == true ? "Chargement..." : "Se connecter",
-                ),
               ),
+
+              SizedBox(),
+
+              Text("Vous  n'avez pas de compte, Creer un compte ?")
             ],
           ),
         ),

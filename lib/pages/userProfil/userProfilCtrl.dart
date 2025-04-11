@@ -17,7 +17,6 @@ class UserProfilCtrl extends StateNotifier<UserProfileState>{
 
   Future<void> recupererUser([User? user])async{
     var user_ = user ?? User();
-    user_=user_.copyWith(token: "4|nhdSn2dINqRNFDgUWerLEDQb9V4Ib3oN35et3AnOc6197108"); // TODO: remove
     state = state.copyWith(user : user_);
   }
 
