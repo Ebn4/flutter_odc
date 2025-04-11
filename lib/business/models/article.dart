@@ -4,7 +4,7 @@ import 'package:app/business/models/user.dart';
 import 'category.dart';
 
 class Article {
-  int? id;
+  int id;
   String? title;
   Auteur? auteur;
   String? slug;
@@ -18,7 +18,7 @@ class Article {
   String? lastmodif;
 
   Article({
-    this.id,
+    required this.id,
     this.title,
     this.auteur,
     this.slug,

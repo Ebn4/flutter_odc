@@ -109,4 +109,28 @@ class BlogNetworkServiceImpl implements BlogNetworkService {
       throw Exception("Une erreur est survenue");
     }
   }
+
+  @override
+  Future<User> recupererUser(String token) async{
+    var url = Uri.parse("${dotenv.env['BASE_URL']}/api/user");
+    var response = await http.get(
+      url,
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer $token"
+      },
+    );
+
+    print(response.statusCode);
+    print(response.body);
+
+    if (response.statusCode != 200) {
+      var error = jsonDecode(response.body)["error"];
+      throw Exception(error);
+    }
+
+    var resultat = jsonDecode(response.body);
+    var recupererUserConnecter = User.fromMap(resultat);
+    return recupererUserConnecter;
+  }
 }

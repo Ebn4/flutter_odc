@@ -1,4 +1,5 @@
 
+import 'package:app/pages/userProfil/userProfilPage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -87,7 +88,7 @@ class _ListArticleState extends ConsumerState<ListarticlePage> {
               Navigator.push(
                 context,
                 //remplacé par la classe de la page user
-                MaterialPageRoute(builder: (_) => ListarticlePage()),
+                MaterialPageRoute(builder: (_) => UserProfilePage()),
               );
             },
                 style: ElevatedButton.styleFrom(

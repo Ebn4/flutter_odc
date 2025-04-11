@@ -25,10 +25,9 @@ void setup() {
     return BlogLocalServiceImpl(box: box);
   });
 }
-
-void main() async {
-  await dotenv.load(); // Charge les variables du .env
+void main() async{
   await GetStorage.init();
+  await dotenv.load(); // Charge les variables du .env
   setup();
   runApp(ProviderScope(child: Appication()));
 }
@@ -56,7 +55,6 @@ class _AppicationState extends ConsumerState<Appication> {
     var state = ref.watch(loginControlPorvider);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      //home: Login(),
       home: state.user != null ? ListarticlePage() : Login(),
     );
   }

@@ -9,6 +9,7 @@ import '../business/services/blogLocalService.dart';
 class BlogLocalServiceImpl implements BlogLocalService {
   GetStorage? box;
   BlogLocalServiceImpl({this.box});
+
   @override
   Future<bool> sauvergaderUser(User user) async {
     var data = user.toMap();
@@ -16,11 +17,20 @@ class BlogLocalServiceImpl implements BlogLocalService {
     return true;
   }
 
+
+  Future<bool> deconnecterUser() async{
+    await box?.remove("user");
+    return true ;
+  }
+
   @override
-  Future<User?> recupererUser() async {
-    var user = await box?.read("user") as String?;
-    if (user == null) return null;
-    var data = jsonDecode(user) as Map;
-    return User.fromMap(data);
+  Future<User?> recupererUserLocal() async{
+    var userJson = await box?.read("user");
+    if(userJson == null ){
+      return null;
+    }
+    var user = User.fromMap(userJson);
+
+    return user;
   }
 }
