@@ -15,17 +15,15 @@ class LoginControl extends StateNotifier<LoginState> {
 
   Future<bool> submitForm(Authentification data) async {
     state = state.copyWith(isLoading: true);
-
-    var user = await network.authentifier(data);
-    if (user != null) {
-      var res = await local.sauvergaderUser(user);
+    try {
+      var user = await network.authentifier(data);
+      var res = await local.sauvergaderUser(user!);
       state = state.copyWith(isLoading: false, user: user);
       return res;
+    } catch (e) {
+      state = state.copyWith(isLoading: false);
+      return false;
     }
-
-    state = state.copyWith(isLoading: false);
-
-    return false;
   }
 
   Future<void> recupererUserLocal() async {
