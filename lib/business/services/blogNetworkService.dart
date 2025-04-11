@@ -13,4 +13,5 @@ abstract class BlogNetworkService {
   Future<List<Comment>> recupererCommentaires(int articleId, String token);
   Future<bool> supprimerCommentaire(int commentId, String token);
   Future<bool> ajouterCommentaire(AjouterCommentaire data, String token);
+  Future<User> recupererUser(String token);
 }

@@ -9,11 +9,29 @@ import '../business/services/blogLocalService.dart';
 class BlogLocalServiceImpl implements BlogLocalService {
   GetStorage? box;
   BlogLocalServiceImpl({this.box});
+
   @override
   Future<bool> sauvergaderUser(User user) async {
     var data = user.toMap();
     await box?.write("user", jsonEncode(data));
     return true;
+  }
+
+  @override
+  Future<bool> deconnecterUser() async{
+    await box?.remove("user");
+    return true ;
+  }
+
+  @override
+  Future<User?> recupererUserLocal() async{
+    var userJson = await box?.read("user");
+    if(userJson == null ){
+      return null;
+    }
+    var user = User.fromMap(userJson);
+
+    return user;
   }
 }
 
