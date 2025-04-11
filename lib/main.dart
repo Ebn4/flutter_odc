@@ -4,10 +4,12 @@ import 'package:app/framework/blogLocalServiceImpl.dart';
 import 'package:app/pages/articleList/listArticle.dart';
 import 'package:app/pages/comment/commentPage.dart';
 import 'package:app/pages/login/login.dart';
+import 'package:app/pages/userProfil/userProfilPage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_it/get_it.dart';
+import 'package:get_storage/get_storage.dart';
 
 import 'framework/blogNetworkServiceImpl.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -20,13 +22,15 @@ void setup(){
     return BlogNetworkServiceImpl();
   });
   getIt.registerLazySingleton<BlogLocalService>((){
-    return BlogLocalServiceImpl();
+    return BlogLocalServiceImpl(box: GetStorage());
   });
 
 
 }
-void main() async{setup();
+void main() async{
+  await GetStorage.init();
   await dotenv.load(); // Charge les variables du .env
+  setup();
   runApp(ProviderScope(child: Appication()));
 }
 class Appication extends StatelessWidget {
@@ -37,7 +41,7 @@ class Appication extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       //home: Login(),
-     home: Login(),
+     home: UserProfilePage(),
     );
   }
 }
